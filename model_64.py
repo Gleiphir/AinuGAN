@@ -86,10 +86,10 @@ class Discriminator(nn.Module):
             nn.Tanh()
 	    )
         self.fc = nn.Linear(w_g * w_g * 512, 1)
-
+        self.act = nn.Tanh()
 
     def forward(self, x):
         m = x
         m = self.seq(m)
-        return  self.fc(m.view(-1,w_g * w_g * 512))
+        return  self.act(self.fc(m.view(-1,w_g * w_g * 512)))
 
