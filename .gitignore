@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 
 myDset/
-
+ainuDset/
 # C extensions
 *.so
 
