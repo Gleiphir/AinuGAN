@@ -102,8 +102,10 @@ def train(epoch):
 			optim_disc.zero_grad()
 			#optim_gen.zero_grad()
 
-			disc_loss = nn.ReLU()(1.0 - discriminator(data)).mean() + nn.ReLU()(1.0 + discriminator(generator(z))).mean()
-
+			#disc_loss = nn.ReLU()(1.0 - discriminator(data)).mean() + nn.ReLU()(1.0 + discriminator(generator(z))).mean()
+			loss_real = (1.0 - discriminator(data))
+			loss_fake = (1.0 + discriminator(generator(z)))
+			disc_loss = loss_real.mean() + loss_fake.mean()
 
 			d_losses.append(disc_loss.data.item())
 
