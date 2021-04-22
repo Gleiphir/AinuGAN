@@ -69,7 +69,7 @@ ckp_mdf = args.checkpoint_dir.format(args.model,"ifuku",mdf(d_lrs))
 
 
 discriminator = torch.nn.DataParallel(model.Discriminator()).cuda()
-generator = model.Generator(Z_dim).cuda()
+generator = model.Generator().cuda()
 
 
 optim_disc = optim.Adam( filter(lambda p: p.requires_grad, discriminator.parameters()),
