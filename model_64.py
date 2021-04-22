@@ -73,21 +73,21 @@ class Discriminator(nn.Module):
             #nn.LeakyReLU(leak),
             nn.Conv2d(64, 128, (3,3), stride=(1,1), padding=(1,1)),
             nn.LeakyReLU(leak),
-		    #nn.Conv2d(128, 128, (4,4), stride=(2,2), padding=(1,1)),
-		    #nn.LeakyReLU(leak),
-		    nn.Conv2d(128, 256, (3,3), stride=(1,1), padding=(1,1)),
+		    nn.Conv2d(128, 128, (4,4), stride=(2,2), padding=(1,1)),
 		    nn.LeakyReLU(leak),
+		    #nn.Conv2d(128, 256, (3,3), stride=(1,1), padding=(1,1)),
+		    #nn.LeakyReLU(leak),
 		    #nn.Conv2d(256, 256, (4,4), stride=(2,2), padding=(1,1)),
 		    #nn.LeakyReLU(leak),
-		    nn.Conv2d(256, 512, (3,3), stride=(1,1), padding=(1,1)),
-		    nn.LeakyReLU(leak),
+		    #nn.Conv2d(256, 512, (3,3), stride=(1,1), padding=(1,1)),
+		    #nn.LeakyReLU(leak),
             nn.Tanh()
 	    )
-        self.fc = nn.Linear(w_g * w_g * 512, 1)
+        self.fc = nn.Linear(w_g * w_g * 128, 1)
         self.act = nn.Tanh()
 
     def forward(self, x):
         m = x
         m = self.seq(m)
-        return  self.act(self.fc(m.view(-1,w_g * w_g * 512)))
+        return  self.act(self.fc(m.view(-1,w_g * w_g * 128)))
 
