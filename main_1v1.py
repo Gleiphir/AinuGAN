@@ -142,7 +142,7 @@ def train(epoch):
 			print("##############################")
 			print('\n')
 			print("iter : %6d ------- time: %4d of %6d Sec"%(g_iter,now_t - last_t,now_t - start_t))
-			print('disc loss(avg): %f,gen loss:%f'%(sum(d_losses)/ float(sum(d_wghs )), gen_loss.data.item()))
+			print('disc loss(avg): %f,gen loss:%f'.format(d_losses, gen_loss.data.item()))
 
 		if g_iter % 10000 == 0:
 			#torch.save(discriminator.state_dict(), os.path.join(args.checkpoint_dir, 'disc_{}'.format(g_iter)))
