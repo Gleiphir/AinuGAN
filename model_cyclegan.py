@@ -52,7 +52,7 @@ class Generator(nn.Module):
         #
         self.main = nn.Sequential(
             # Initial convolution block
-            #nn.ReflectionPad2d(3),
+            nn.ReflectionPad2d(3),
             nn.Conv2d(3, 64, (7,7)),
             nn.InstanceNorm2d(64),
             nn.ReLU(inplace=True),
