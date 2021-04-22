@@ -83,11 +83,13 @@ class Discriminator(nn.Module):
 		    #nn.LeakyReLU(leak),
 		    nn.Conv2d(256, 512, (3,3), stride=(1,1), padding=(1,1)),
 		    nn.LeakyReLU(leak),
+            nn.Tanh()
 	    )
         self.fc = nn.Linear(w_g * w_g * 512, 1)
+
 
     def forward(self, x):
         m = x
         m = self.seq(m)
-        return self.fc(m.view(-1,w_g * w_g * 512))
+        return  self.fc(m.view(-1,w_g * w_g * 512))
 
