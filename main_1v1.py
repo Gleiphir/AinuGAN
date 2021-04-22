@@ -54,7 +54,7 @@ import model_64 as model
 if args.d_lrs:
 	d_lrs = [ x* 1e-4 for x in args.d_lrs]
 else:
-	d_lrs =  [2e-4]
+	d_lrs =  [2e-5]
 
 d_wghs = [1.0 for d_lr in d_lrs]
 #d_wghs = [1,1,1]
