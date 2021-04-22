@@ -43,7 +43,7 @@ disc_iters = 1
 
 # discriminator = torch.nn.DataParallel(Discriminator()).cuda() # TODO: try out multi-gpu training
 
-import model_64 as model
+import model_cyclegan as model
 
 
 # because the spectral normalization module creates parameters that don't require gradients (u and v), we don't want to 
