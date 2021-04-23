@@ -76,7 +76,7 @@ optim_disc = optim.Adam( filter(lambda p: p.requires_grad, discriminator.paramet
 	 lr=2e-4, betas=(0.5,0.999)
 	)
 
-optim_gen  = optim.Adam(generator.parameters(), lr=args.lr, betas=(0.5,0.999))
+optim_gen  = optim.Adam(generator.parameters(), lr=2e-4, betas=(0.5,0.999))
 
 # use an exponentially decaying learning rate
 #scheduler_ds = [optim.lr_scheduler.ExponentialLR(optim_disc, gamma=0.99) for optim_disc in optim_discs ]

@@ -95,7 +95,7 @@ class Generator(nn.Module):
         )
 
     def forward(self, x):
-        x = self.unfold(x)
+        x = self.unfold(x).view(-1,3,64,64)
         return self.main(x)
 
 
