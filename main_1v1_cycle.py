@@ -37,7 +37,7 @@ datasets.ImageFolder('myDset', transform=transforms.Compose([
 		transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])),
 	batch_size=args.batch_size, shuffle=True, num_workers=8, pin_memory=True)
 
-Z_dim = 256
+Z_dim = 128
 #number of updates to discriminator for every update to generator 
 disc_iters = 1
 
@@ -98,7 +98,7 @@ def train(epoch):
 	
 
 		for _ in range(disc_iters):
-			z = Variable(torch.randn(args.batch_size, 3,64,64).cuda())
+			z = Variable(torch.randn(args.batch_size,Z_dim).cuda())
 			optim_disc.zero_grad()
 			#optim_gen.zero_grad()
 
@@ -115,7 +115,7 @@ def train(epoch):
 		
 		
 		
-		z = Variable(torch.randn(args.batch_size, 3, 64, 64).cuda())
+		z = Variable(torch.randn(args.batch_size, Z_dim).cuda())
 
 		#print(generator(z).size())# update generator
 		#optim_disc.zero_grad()
@@ -154,7 +154,7 @@ def train(epoch):
 		#scheduler_g.step()
 
 
-fixed_z = Variable(torch.randn(args.batch_size, 3,64,64).cuda())
+fixed_z = Variable(torch.randn(args.batch_size, Z_dim).cuda())
 
 def evaluate(epoch):
 
@@ -191,7 +191,7 @@ if __name__ == "__main__":
 		print("EPOCH # %d"%epoch)
 		if epoch %100 ==0:
 			evaluate(epoch)
-			fixed_z = Variable(torch.randn(args.batch_size, 3,64,64).cuda())
+			fixed_z = Variable(torch.randn(args.batch_size, Z_dim).cuda())
 			fake_images = generator(fixed_z)
 			torchvision.utils.save_image(fake_images.data,os.path.join("./out__", '{}_fake.png'.format(epoch)),normalize=True,padding=0)
 

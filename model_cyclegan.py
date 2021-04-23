@@ -45,17 +45,21 @@ class Discriminator(nn.Module):
         x = torch.flatten(x, 1)
         return x
 
+z_dim = 128
 
 class Generator(nn.Module):
     def __init__(self):
         super(Generator, self).__init__()
         #
+        self.unfold = nn.Linear(z_dim,64*64*3)
         self.main = nn.Sequential(
+
             # Initial convolution block
             nn.ReflectionPad2d(3),
             nn.Conv2d(3, 64, (7,7)),
             nn.InstanceNorm2d(64),
             nn.ReLU(inplace=True),
+
 
             # Downsampling
             nn.Conv2d(64, 128, (3,3), stride=(2,2), padding=(1,1)),
@@ -91,6 +95,7 @@ class Generator(nn.Module):
         )
 
     def forward(self, x):
+        x = self.unfold(x)
         return self.main(x)
 
 

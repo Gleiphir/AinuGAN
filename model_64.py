@@ -32,9 +32,6 @@ class ResBlk(nn.Module):
         print(x.size(),self.layers(x).size() , self.bypass(x).size() )
         return self.layers(x) + self.bypass(x)
 
-
-
-
 class Generator(nn.Module):
     def __init__(self, z_dim):
         super(Generator, self).__init__()
