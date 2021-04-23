@@ -98,7 +98,7 @@ def train(epoch):
 	
 
 		for _ in range(disc_iters):
-			z = Variable(torch.randn(args.batch_size,Z_dim).cuda())
+			z = torch.randn(args.batch_size,Z_dim).cuda()
 			optim_disc.zero_grad()
 			#optim_gen.zero_grad()
 
@@ -115,11 +115,12 @@ def train(epoch):
 		
 		
 		
-		z = Variable(torch.randn(args.batch_size, Z_dim).cuda())
+
 
 		#print(generator(z).size())# update generator
 		#optim_disc.zero_grad()
 		for _ in range(gen_times):
+			z = torch.randn(args.batch_size, Z_dim).cuda()
 			optim_gen.zero_grad()
 			#print(generator(z).size())
 			losses = []
@@ -148,7 +149,7 @@ def train(epoch):
 
 		if g_iter % 2000 == 0:
 			#torch.save(discriminator.state_dict(), os.path.join(args.checkpoint_dir, 'disc_{}'.format(g_iter)))
-			torch.save(generator.state_dict(), os.path.join(ckp_mdf, 'gen_{}'.format(g_iter)))#args.checkpoint_dir, 'gen_{}'.format(g_iter)))
+			torch.save(generator.state_dict(), os.path.join(ckp_mdf, 'gen_{}.wgh'.format(g_iter)))#args.checkpoint_dir, 'gen_{}'.format(g_iter)))
 		#for scheduler_d in scheduler_ds:
 			#scheduler_d.step()
 		#scheduler_g.step()

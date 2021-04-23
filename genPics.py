@@ -15,7 +15,7 @@ generator = model.Generator().cuda()
 
 batch_size = args.batch_size
 #mdlPath = args.model
-mdlPath = "./gen_30000"
+mdlPath = "./gen_18000"
 generator.load_state_dict(torch.load(mdlPath))
 
 now = datetime.now()
@@ -23,8 +23,8 @@ date_time = now.strftime("%m-%d-%H-%M")
 print("date and time:",date_time)
 
 
-for i in range(batch_size):
-    fixed_z = torch.rand(1, 3, 64, 64).cuda()
-    fake_images = generator(fixed_z)
-    torchvision.utils.save_image(fake_images.data, os.path.join("./out__", '{}_fake_{}.png'.format(date_time,i)), normalize=True,
-                                 padding=0)
+
+fixed_z = torch.randn(64, 128).cuda()
+fake_images = generator(fixed_z)
+torchvision.utils.save_image(fake_images.data, os.path.join("./out__", 'fake_{}.png'.format(date_time)), normalize=True,
+                             padding=0)
