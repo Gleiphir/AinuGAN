@@ -135,7 +135,7 @@ def train(epoch):
 
 			optim_gen.step()
 
-		g_iter += 1
+			g_iter += 1
 
 		if batch_idx % 100 == 0:
 
@@ -146,7 +146,7 @@ def train(epoch):
 			print("iter : %6d ------- time: %4d of %6d Sec"%(g_iter,now_t - last_t,now_t - start_t))
 			print('disc loss(avg):R{},F{},gen loss:{}'.format(loss_real.mean(),loss_fake.mean(), gen_loss.data.item()))
 
-		if g_iter % 10000 == 0:
+		if g_iter % 2000 == 0:
 			#torch.save(discriminator.state_dict(), os.path.join(args.checkpoint_dir, 'disc_{}'.format(g_iter)))
 			torch.save(generator.state_dict(), os.path.join(ckp_mdf, 'gen_{}'.format(g_iter)))#args.checkpoint_dir, 'gen_{}'.format(g_iter)))
 		#for scheduler_d in scheduler_ds:
