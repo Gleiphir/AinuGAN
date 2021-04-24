@@ -15,7 +15,7 @@ generator = model.Generator().cuda()
 
 batch_size = args.batch_size
 #mdlPath = args.model
-mdlPath = "./gen_18000"
+mdlPath = "./gen_34000.wgh"
 generator.load_state_dict(torch.load(mdlPath))
 
 now = datetime.now()
