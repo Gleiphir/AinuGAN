@@ -30,19 +30,19 @@ class Discriminator(nn.Module):
             nn.InstanceNorm2d(128),
             nn.LeakyReLU(0.2, inplace=True),
 
-            nn.Dropout2d(dropout, inplace=True),
+            nn.Dropout2d(dropout),
 
             nn.Conv2d(128, 256, (4,4), stride=(2,2), padding=(1,1)),
             nn.InstanceNorm2d(256),
             nn.LeakyReLU(0.2, inplace=True),
 
-            nn.Dropout2d(dropout, inplace=True),
+            nn.Dropout2d(dropout),
 
             nn.Conv2d(256, 512, (4,4), padding=(1,1)),
             nn.InstanceNorm2d(512),
             nn.LeakyReLU(0.2, inplace=True),
 
-            nn.Dropout2d(dropout, inplace=True),
+            nn.Dropout2d(dropout),
 
             nn.Conv2d(512, 1, (4,4), padding=(1,1)),
         )
@@ -121,7 +121,7 @@ class ResidualBlock(nn.Module):
                                  nn.ReflectionPad2d(1),
                                  nn.Conv2d(in_channels, in_channels, (3,3)),
                                  nn.InstanceNorm2d(in_channels),
-                                 nn.Dropout2d(dropout, inplace=True),
+                                 nn.Dropout2d(dropout),
                                  )
 
     def forward(self, x):
