@@ -37,7 +37,7 @@ datasets.ImageFolder('myDset', transform=transforms.Compose([
 		transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])),
 	batch_size=args.batch_size, shuffle=True, num_workers=8, pin_memory=True)
 
-Z_dim = 128
+Z_dim = 256
 #number of updates to discriminator for every update to generator 
 disc_iters = 1
 
