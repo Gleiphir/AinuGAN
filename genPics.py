@@ -15,16 +15,26 @@ generator = model.Generator().cuda()
 
 batch_size = args.batch_size
 #mdlPath = args.model
-mdlPath = "./gen_34000.wgh"
-generator.load_state_dict(torch.load(mdlPath))
-
-now = datetime.now()
-date_time = now.strftime("%m-%d-%H-%M")
-print("date and time:",date_time)
+#mdlPath = "./gen_12000.wgh"
 
 
+parseInt = lambda s : int( "".join([ x for x in s if x in "0123456789" ]) )
 
-fixed_z = torch.randn(64, 128).cuda()
-fake_images = generator(fixed_z)
-torchvision.utils.save_image(fake_images.data, os.path.join("./out__", 'fake_{}.png'.format(date_time)), normalize=True,
-                             padding=0)
+
+def gen(mdlPath):
+    generator.load_state_dict(torch.load(mdlPath))
+    now = datetime.now()
+    date_time = now.strftime("%m-%d-%H-%M")
+    print("date and time:",date_time)
+
+
+
+    fixed_z = torch.randn(64, 128).cuda()
+
+    fake_images = generator(fixed_z)
+    torchvision.utils.save_image(fake_images.data, os.path.join("./out__", 'fake_{}_{}.png'.format(date_time,parseInt(mdlPath))), normalize=True,
+                                 padding=0)
+
+
+for i in range(2000,178000,2000):
+    gen("./gen_{}.wgh".format(i))

@@ -43,7 +43,7 @@ disc_iters = 1
 
 # discriminator = torch.nn.DataParallel(Discriminator()).cuda() # TODO: try out multi-gpu training
 
-import model_cyclegan_dropout as model
+import model_cyclegan_dropout_shallow as model
 
 
 # because the spectral normalization module creates parameters that don't require gradients (u and v), we don't want to 
@@ -68,8 +68,8 @@ def mdf(it):
 ckp_mdf = args.checkpoint_dir.format(args.model,"ifuku",mdf(d_lrs))
 
 
-dr_d = 0.2
-dr_g = 0.1
+dr_d = 0.5
+dr_g = 0.5
 
 discriminator = torch.nn.DataParallel(model.Discriminator(dr_d)).cuda()
 generator = model.Generator(dr_g).cuda()

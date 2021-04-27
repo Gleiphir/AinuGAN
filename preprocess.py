@@ -3,7 +3,7 @@ from pathlib import Path
 import os
 raw_folder = Path(r"D:\Github\AinuGAN\ainuDset\Full Size Imgs\Ifuku")
 
-output_folder = Path(r"D:\Github\AinuGAN\myDset-ifuku")
+output_folder = Path(r"D:\Github\AinuGAN\myDset-ifuku-full")
 
 def centerCrop(im:Image,size):
     new_width,new_height = size[0],size[1]
@@ -25,6 +25,7 @@ for fname in raw_folder.iterdir():
     im = Image.open(fname.absolute())
     im_cutted = centerCrop(im,(1488,1488))
     #im_cutted.show()
-    im_resized = im_cutted.resize((256, 256), Image.BICUBIC)
-    im_resized.save(output_folder / new_name )
+    #im_resized = im_cutted.resize((256, 256), Image.BICUBIC)
+    im_cutted.save(output_folder / new_name )
+    #im_resized.save(output_folder / new_name )
 
