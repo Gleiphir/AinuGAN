@@ -1,4 +1,4 @@
-import model_cyclegan as model
+import model_cyclegan_dropout_shallow as model
 import torch
 import torchvision
 import argparse
@@ -11,7 +11,7 @@ parser.add_argument('--lr', type=float, default=2e-4)
 parser.add_argument('--model', type=str)
 args = parser.parse_args()
 
-generator = model.Generator().cuda()
+generator = model.Generator(0.5).cuda()
 
 batch_size = args.batch_size
 #mdlPath = args.model
@@ -29,12 +29,12 @@ def gen(mdlPath):
 
 
 
-    fixed_z = torch.randn(64, 128).cuda()
+    fixed_z = torch.randn(64, 256).cuda()
 
     fake_images = generator(fixed_z)
     torchvision.utils.save_image(fake_images.data, os.path.join("./out__", 'fake_{}_{}.png'.format(date_time,parseInt(mdlPath))), normalize=True,
                                  padding=0)
 
 
-for i in range(2000,178000,2000):
+for i in range(32000,68000,2000):
     gen("./gen_{}.wgh".format(i))

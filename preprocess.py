@@ -1,13 +1,16 @@
 from PIL import Image
 from pathlib import Path
 import os
-raw_folder = Path(r"D:\Github\AinuGAN\ainuDset\Full Size Imgs\Ifuku")
+raw_folder = Path(r"D:\Github\AinuGAN\myDset-picked")
 
-output_folder = Path(r"D:\Github\AinuGAN\myDset-ifuku-full")
+output_folder = Path(r"D:\Github\AinuGAN\myDset-picked-processed")
 
 def centerCrop(im:Image,size):
     new_width,new_height = size[0],size[1]
     width, height = im.size   # Get dimensions
+    if width < size[0] or height < size[1]:
+        new_width = min(width,height)
+        new_height = new_width
 
     left = (width - new_width)/2
     top = (height - new_height)/2
@@ -25,7 +28,7 @@ for fname in raw_folder.iterdir():
     im = Image.open(fname.absolute())
     im_cutted = centerCrop(im,(1488,1488))
     #im_cutted.show()
-    #im_resized = im_cutted.resize((256, 256), Image.BICUBIC)
-    im_cutted.save(output_folder / new_name )
+    im_resized = im_cutted.resize((256, 256), Image.BILINEAR)
+    im_resized.save(output_folder / new_name )
     #im_resized.save(output_folder / new_name )
 

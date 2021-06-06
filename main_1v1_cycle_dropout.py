@@ -31,7 +31,7 @@ args = parser.parse_args()
 
 
 loader = torch.utils.data.DataLoader(
-datasets.ImageFolder('myDset', transform=transforms.Compose([
+datasets.ImageFolder('/mnt/Dataset/JacobZh/myDset-picked-processed', transform=transforms.Compose([
 		transforms.RandomCrop(64),
 		transforms.ToTensor(),
 		transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])),
