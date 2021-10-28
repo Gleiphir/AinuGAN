@@ -48,10 +48,10 @@ if __name__ =='__main__':
 			optim.zero_grad()
 			# print(generator(z).size())
 			losses = []
-			onehotEncode = F.one_hot(target)
+
 			predict = CL(data)
-			print(predict.size(),onehotEncode.size())
-			loss = nn.MSELoss(predict,onehotEncode)
+			#print(predict.size(),onehotEncode.size())
+			loss = F.cross_entropy(predict,target)
 
 
 			"""
