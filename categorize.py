@@ -50,7 +50,7 @@ if __name__ =='__main__':
 			losses = []
 			onehotEncode = F.one_hot(target)
 			predict = CL(data)
-
+			print(predict.size(),onehotEncode.size())
 			loss = nn.functional.cross_entropy(predict,onehotEncode)
 
 			"""
