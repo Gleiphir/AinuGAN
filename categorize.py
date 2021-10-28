@@ -65,7 +65,7 @@ if __name__ =='__main__':
 			print("##############################")
 			print('\n')
 			print("iter : %6d ------- time: %4d of %6d Sec" % (g_iter, now_t - last_t, now_t - start_t))
-			print('real:{},fake:{},loss:{}'.format(target.mean().item(),predict.mean().item(),loss.item()))
+			print('real:{},fake:{},loss:{}'.format(target.tolist(),predict.tolist(),loss.item()))
 			if g_iter % 10000 == 0:
 				# torch.save(discriminator.state_dict(), os.path.join(args.checkpoint_dir, 'disc_{}'.format(g_iter)))
 				torch.save(CL.state_dict(),
