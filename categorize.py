@@ -51,7 +51,8 @@ if __name__ =='__main__':
 			onehotEncode = F.one_hot(target)
 			predict = CL(data)
 			print(predict.size(),onehotEncode.size())
-			loss = nn.functional.cross_entropy(predict,onehotEncode)
+			loss = nn.MSELoss(predict,onehotEncode)
+
 
 			"""
 			gen_loss = torch.cat(losses).mean()# 2 * 32 *... / 4 * 16 * ...
