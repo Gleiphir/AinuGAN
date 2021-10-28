@@ -15,7 +15,7 @@ BATCH_SIZE = 1
 CL = Classifier().cuda()
 
 loader = torch.utils.data.DataLoader(
-datasets.ImageFolder('myDset', transform=transforms.Compose([
+datasets.ImageFolder('/mnt/Dataset/JacobZh/AinuDset-ori', transform=transforms.Compose([
 		transforms.RandomCrop(256),
 		transforms.ToTensor(),
 		transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])),
