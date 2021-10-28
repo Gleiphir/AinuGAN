@@ -25,10 +25,13 @@ datasets.ImageFolder('/mnt/Dataset/JacobZh/AinuDset-ori', transform=transforms.C
 optim = optim.Adam( filter(lambda p: p.requires_grad, CL.parameters()),
 	 lr=2e-4, betas=(0.5,0.999)
 	)
-
+g_iter=0
+start_t=0
+last_t=0
+now_t=0
 
 if __name__ =='__main__':
-	global g_iter, start_t, last_t, now_t
+
 	for batch_idx, (data, target) in enumerate(loader):
 		if data.size()[0] != BATCH_SIZE:
 			continue
