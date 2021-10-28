@@ -10,7 +10,7 @@ from model_category import Classifier
 import time
 import os
 
-BATCH_SIZE = 1
+BATCH_SIZE = 8
 
 CL = Classifier().cuda()
 
