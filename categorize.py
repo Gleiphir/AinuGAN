@@ -30,48 +30,53 @@ start_t=0
 last_t=0
 now_t=0
 
+OVER_ITER = 100000
+
+over_flag = False
+
 if __name__ =='__main__':
+	while not over_flag:
+		for batch_idx, (data, target) in enumerate(loader):
+			if data.size()[0] != BATCH_SIZE:
+				continue
+			data, target = Variable(data.cuda()), Variable(target.cuda())
 
-	for batch_idx, (data, target) in enumerate(loader):
-		if data.size()[0] != BATCH_SIZE:
-			continue
-		data, target = Variable(data.cuda()), Variable(target.cuda())
+			# update discriminator
+			d_losses = []
 
-		# update discriminator
-		d_losses = []
+			optim.zero_grad()
+			# print(generator(z).size())
+			losses = []
 
-		optim.zero_grad()
-		# print(generator(z).size())
-		losses = []
+			predict = CL(data)
 
-		predict = CL(data)
+			loss = nn.functional.cross_entropy(predict,target)
 
-		loss = nn.functional.cross_entropy(predict,target)
+			"""
+			gen_loss = torch.cat(losses).mean()# 2 * 32 *... / 4 * 16 * ...
+	
+			gen_loss =gen_loss.mean()
+			"""
+			loss.backward()
 
-		"""
-		gen_loss = torch.cat(losses).mean()# 2 * 32 *... / 4 * 16 * ...
+			optim.step()
 
-		gen_loss =gen_loss.mean()
-		"""
-		loss.backward()
+			g_iter += 1
 
-		optim.step()
-
-		g_iter += 1
-
-		if batch_idx % 100 == 0:
-			last_t = now_t
-			now_t = time.time()
-			print("##############################")
-			print('\n')
-			print("iter : %6d ------- time: %4d of %6d Sec" % (g_iter, now_t - last_t, now_t - start_t))
-			print('real:{},fake:{},loss:{}'.format(target.tolist(),predict.tolist(),loss.item()))
-			if g_iter % 10000 == 0:
-				# torch.save(discriminator.state_dict(), os.path.join(args.checkpoint_dir, 'disc_{}'.format(g_iter)))
-				torch.save(CL.state_dict(),
-						   os.path.join(os.getcwd(),
-										'gen_{}'.format(g_iter)))  # args.checkpoint_dir, 'gen_{}'.format(g_iter)))
-
+			if batch_idx % 100 == 0:
+				last_t = now_t
+				now_t = time.time()
+				print("##############################")
+				print('\n')
+				print("iter : %6d ------- time: %4d of %6d Sec" % (g_iter, now_t - last_t, now_t - start_t))
+				print('real:{},fake:{},loss:{}'.format(target.tolist(),predict[target].tolist(),loss.item()))
+				if g_iter % 10000 == 0:
+					# torch.save(discriminator.state_dict(), os.path.join(args.checkpoint_dir, 'disc_{}'.format(g_iter)))
+					torch.save(CL.state_dict(),
+							   os.path.join(os.getcwd(),
+											'gen_{}'.format(g_iter)))  # args.checkpoint_dir, 'gen_{}'.format(g_iter)))
+			if g_iter >= OVER_ITER:
+				over_flag = True
 # for scheduler_d in scheduler_ds:
 # scheduler_d.step()
 # scheduler_g.step()
