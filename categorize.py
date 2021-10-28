@@ -72,11 +72,11 @@ if __name__ =='__main__':
 				print('\n')
 				print("iter : %6d ------- time: %4d of %6d Sec" % (g_iter, now_t - last_t, now_t - start_t))
 				print('real:{},fake:{},loss:{}'.format(target.tolist(),predict[target].mean().item(),loss.item()))
-				if g_iter % 10000 == 0:
-					# torch.save(discriminator.state_dict(), os.path.join(args.checkpoint_dir, 'disc_{}'.format(g_iter)))
-					torch.save(CL.state_dict(),
-							   os.path.join(os.getcwd(),
-											'gen_{}'.format(g_iter)))  # args.checkpoint_dir, 'gen_{}'.format(g_iter)))
+			if g_iter % 10000 == 0:
+				# torch.save(discriminator.state_dict(), os.path.join(args.checkpoint_dir, 'disc_{}'.format(g_iter)))
+				torch.save(CL.state_dict(),
+						   os.path.join(os.getcwd(),
+										'gen_{}'.format(g_iter)))  # args.checkpoint_dir, 'gen_{}'.format(g_iter)))
 			if g_iter >= OVER_ITER:
 				over_flag = True
 # for scheduler_d in scheduler_ds:
