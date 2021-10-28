@@ -36,5 +36,5 @@ def gen(mdlPath):
                                  padding=0)
 
 
-for i in range(32000,68000,2000):
+for i in range(2000,18000,2000):
     gen("./gen_{}.wgh".format(i))
