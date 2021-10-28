@@ -35,6 +35,7 @@ OVER_ITER = 100000
 over_flag = False
 
 if __name__ =='__main__':
+	start_t = time.time()
 	while not over_flag:
 		for batch_idx, (data, target) in enumerate(loader):
 			if data.size()[0] != BATCH_SIZE:
@@ -47,10 +48,10 @@ if __name__ =='__main__':
 			optim.zero_grad()
 			# print(generator(z).size())
 			losses = []
-
+			onehotEncode = F.one_hot(target)
 			predict = CL(data)
 
-			loss = nn.functional.cross_entropy(predict,target)
+			loss = nn.functional.cross_entropy(predict,onehotEncode)
 
 			"""
 			gen_loss = torch.cat(losses).mean()# 2 * 32 *... / 4 * 16 * ...
