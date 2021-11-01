@@ -77,6 +77,7 @@ if __name__ =='__main__':
 				now_t = time.time()
 
 				print("##############################")
+				print(target)
 				print(predict.size())
 				print(predict[target].size())
 				print('\n')
