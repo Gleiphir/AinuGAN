@@ -84,7 +84,7 @@ if __name__ =='__main__':
 				print(predict.cpu().detach()[target])
 				print(predict.cpu().detach()[:,target])
 				print(predict.cpu().detach()[target,:])
-				print(torch.index_select(predict.cpu().detach(),1,target) )
+				print(torch.index_select(predict,1,target) )
 				#print(torch.argmax(predict,dim=1))
 				#print(confid)
 				#print(confid.size())
