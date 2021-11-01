@@ -22,7 +22,7 @@ dset = datasets.ImageFolder('/mnt/Dataset/JacobZh/AinuDset-ori', transform=trans
 loader = torch.utils.data.DataLoader(dset,
 	batch_size=BATCH_SIZE, shuffle=True, num_workers=8, pin_memory=True)
 
-print(dset.classes,dset.class_to_idx)
+print(dset.class_to_idx)
 
 optim = optim.Adam( filter(lambda p: p.requires_grad, CL.parameters()),
 	 lr=2e-4, betas=(0.5,0.999)
@@ -52,6 +52,7 @@ if __name__ =='__main__':
 			losses = []
 
 			predict = CL(data)
+			print(target)
 			target_onehot = F.one_hot(target,num_classes=data.size(1))
 			print(predict.size(),target_onehot.size())
 			loss_fn = nn.BCELoss()
