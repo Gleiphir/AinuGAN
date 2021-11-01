@@ -75,10 +75,13 @@ if __name__ =='__main__':
 			if batch_idx % 100 == 0:
 				last_t = now_t
 				now_t = time.time()
+
 				confid = predict.cpu().detach()[torch.LongTensor(target.cpu())]
+
 				print("##############################")
 				print(target)
 				print(predict.cpu().detach())
+				print(torch.argmax(predict))
 				print(confid)
 				print(confid.size())
 				#print(predict[:,target].size())
