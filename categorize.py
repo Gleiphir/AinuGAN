@@ -76,18 +76,12 @@ if __name__ =='__main__':
 				last_t = now_t
 				now_t = time.time()
 
-				confid = predict.cpu().detach()[torch.LongTensor(target.cpu())]
+				confid = predict[torch.arange(BATCH_SIZE),target]
 
 				print("##############################")
-				print(target)
-				print(predict.cpu().detach())
-				print(predict.cpu().detach()[target])
-				print(predict.cpu().detach()[:,target])
-				print(predict.cpu().detach()[target,:])
-				print(torch.index_select(predict, 0, target))
-				print(torch.index_select(predict,1,target) )
+
 				#print(torch.argmax(predict,dim=1))
-				#print(confid)
+				print(confid)
 				#print(confid.size())
 				#print(predict[:,target].size())
 				print('\n')
