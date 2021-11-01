@@ -81,7 +81,7 @@ if __name__ =='__main__':
 				print("##############################")
 
 				#print(torch.argmax(predict,dim=1))
-				print(confid)
+				#print(confid)
 				#print(confid.size())
 				#print(predict[:,target].size())
 				print('\n')
@@ -89,7 +89,7 @@ if __name__ =='__main__':
 				print('real:{},pred:{},confid:{}\n,acc:{:.4f},loss:{:.6f}'.format(
 					target.tolist(),
 					torch.argmax(predict,dim=1).tolist(),
-					[''.join(["{:.2f}".format(x) for x in predict[target].tolist()])],
+					confid,
 					predict[target].mean().item(),
 					loss.item())
 				)
