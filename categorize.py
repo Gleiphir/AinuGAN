@@ -77,6 +77,7 @@ if __name__ =='__main__':
 				now_t = time.time()
 				confid = predict.cpu().detach()[target]
 				print("##############################")
+				print(predict.cpu().detach())
 				print(confid)
 				print(confid.size())
 				#print(predict[:,target].size())
