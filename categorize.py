@@ -52,7 +52,8 @@ if __name__ =='__main__':
 			losses = []
 
 			predict = CL(data)
-			#print(predict.size(),onehotEncode.size())
+			target_onehot = F.one_hot(target,num_classes=data.size(1))
+			print(predict.size(),target_onehot.size())
 			loss_fn = nn.BCELoss()
 			loss = loss_fn(predict, target)
 
