@@ -55,11 +55,11 @@ if __name__ =='__main__':
 
 			predict = CL(data)
 			#print(target,data.size(1),data.size())
-			target_onehot = F.one_hot(target,num_classes=N_CLASS).to(torch.FloatTensor)
+			target_onehot = F.one_hot(target,num_classes=N_CLASS)
 
 			#print(predict.size(),target_onehot.size())
 			loss_fn = nn.BCELoss()
-			loss = loss_fn(predict, target_onehot)
+			loss = loss_fn(predict, target_onehot.to(torch.FloatTensor))
 
 			"""
 			gen_loss = torch.cat(losses).mean()# 2 * 32 *... / 4 * 16 * ...
