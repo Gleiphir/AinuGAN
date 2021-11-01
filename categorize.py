@@ -75,7 +75,9 @@ if __name__ =='__main__':
 			if batch_idx % 100 == 0:
 				last_t = now_t
 				now_t = time.time()
+
 				print("##############################")
+				print(predict[target].tolist())
 				print('\n')
 				print("iter : %6d ------- time: %4d of %6d Sec" % (g_iter, now_t - last_t, now_t - start_t))
 				print('real:{},pred:{},confid:{}\n,acc:{:.4f},loss:{:.6f}'.format(
