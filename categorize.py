@@ -77,9 +77,9 @@ if __name__ =='__main__':
 				now_t = time.time()
 
 				print("##############################")
-				print(target)
+				#print(target)
 				print(predict.size())
-				print(predict[target].size())
+				print(predict[:,target].size())
 				print('\n')
 				print("iter : %6d ------- time: %4d of %6d Sec" % (g_iter, now_t - last_t, now_t - start_t))
 				print('real:{},pred:{},confid:{}\n,acc:{:.4f},loss:{:.6f}'.format(
