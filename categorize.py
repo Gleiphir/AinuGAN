@@ -78,14 +78,14 @@ if __name__ =='__main__':
 				confid = torch.index_select(predict.detach(),1,target)
 				print("##############################")
 				print(confid)
-				#print(predict.size())
+				print(confid.size())
 				#print(predict[:,target].size())
 				print('\n')
 				print("iter : %6d ------- time: %4d of %6d Sec" % (g_iter, now_t - last_t, now_t - start_t))
 				print('real:{},pred:{},confid:{}\n,acc:{:.4f},loss:{:.6f}'.format(
 					target.tolist(),
-					[ ''.join( ["{:.2f}".format(x) for x in predict[target].tolist()] )],
 					torch.argmax(predict,dim=1).tolist(),
+					[''.join(["{:.2f}".format(x) for x in predict[target].tolist()])],
 					predict[target].mean().item(),
 					loss.item())
 				)
