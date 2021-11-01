@@ -81,7 +81,7 @@ if __name__ =='__main__':
 				print("##############################")
 				print(target)
 				print(predict.cpu().detach())
-				print(torch.argmax(predict))
+				print(torch.argmax(predict,dim=1))
 				print(confid)
 				print(confid.size())
 				#print(predict[:,target].size())
