@@ -59,7 +59,7 @@ if __name__ =='__main__':
 
 			#print(predict.size(),target_onehot.size())
 			loss_fn = nn.BCELoss()
-			loss = loss_fn(predict, target_onehot.to(torch.FloatTensor))
+			loss = loss_fn(predict, target_onehot.to(torch.float))
 
 			"""
 			gen_loss = torch.cat(losses).mean()# 2 * 32 *... / 4 * 16 * ...
