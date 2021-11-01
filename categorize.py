@@ -75,7 +75,7 @@ if __name__ =='__main__':
 			if batch_idx % 100 == 0:
 				last_t = now_t
 				now_t = time.time()
-				confid = predict.cpu().detach()[target]
+				confid = predict.cpu().detach()[torch.LongTensor(target)]
 				print("##############################")
 				print(predict.cpu().detach())
 				print(confid)
