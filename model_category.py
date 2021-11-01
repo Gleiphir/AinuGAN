@@ -38,13 +38,14 @@ class Classifier(nn.Module):
         )
 
         self.fc = nn.Linear( 28 * 28, NUM_CATGR)
+        self.actvsig = nn.Sigmoid()
 
     def forward(self, x):
         x = self.main(x)
         #x = F.avg_pool2d(x, x.size()[2:])
         x = torch.flatten(x, 1)
         x = self.fc( x )
-        return x
+        return self.actvsig(x)
 
 BATCH_SIZE = 32
 

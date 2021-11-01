@@ -14,13 +14,15 @@ BATCH_SIZE = 8
 
 CL = Classifier().cuda()
 
-loader = torch.utils.data.DataLoader(
-datasets.ImageFolder('/mnt/Dataset/JacobZh/AinuDset-ori', transform=transforms.Compose([
+dset = datasets.ImageFolder('/mnt/Dataset/JacobZh/AinuDset-ori', transform=transforms.Compose([
 		transforms.RandomCrop(256),
 		transforms.ToTensor(),
-		transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])),
+		transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]))
+
+loader = torch.utils.data.DataLoader(dset,
 	batch_size=BATCH_SIZE, shuffle=True, num_workers=8, pin_memory=True)
 
+print(dset.classes,dset.class_to_idx)
 
 optim = optim.Adam( filter(lambda p: p.requires_grad, CL.parameters()),
 	 lr=2e-4, betas=(0.5,0.999)
@@ -51,7 +53,7 @@ if __name__ =='__main__':
 
 			predict = CL(data)
 			#print(predict.size(),onehotEncode.size())
-			loss = F.cross_entropy(predict,target)
+			loss = nn.BCELoss(predict,target)
 
 
 			"""
