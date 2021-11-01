@@ -24,6 +24,8 @@ loader = torch.utils.data.DataLoader(dset,
 
 print(dset.class_to_idx)
 
+N_CLASS = len(dset.classes)
+
 optim = optim.Adam( filter(lambda p: p.requires_grad, CL.parameters()),
 	 lr=2e-4, betas=(0.5,0.999)
 	)
@@ -52,9 +54,10 @@ if __name__ =='__main__':
 			losses = []
 
 			predict = CL(data)
-			print(target,data.size(1),data.size())
-			target_onehot = F.one_hot(target,num_classes=data.size(1))
-			print(predict.size(),target_onehot.size())
+			#print(target,data.size(1),data.size())
+			target_onehot = F.one_hot(target,num_classes=N_CLASS)
+
+			#print(predict.size(),target_onehot.size())
 			loss_fn = nn.BCELoss()
 			loss = loss_fn(predict, target)
 
