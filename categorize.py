@@ -53,8 +53,8 @@ if __name__ =='__main__':
 
 			predict = CL(data)
 			#print(predict.size(),onehotEncode.size())
-			loss = nn.BCELoss(predict,target)
-
+			loss_fn = nn.BCELoss()
+			loss = loss_fn(predict, target)
 
 			"""
 			gen_loss = torch.cat(losses).mean()# 2 * 32 *... / 4 * 16 * ...
