@@ -84,12 +84,12 @@ if __name__ =='__main__':
 				#print(confid)
 				#print(confid.size())
 				#print(predict[:,target].size())
-				print('\n')
+				#print('\n')
 				print("iter : %6d ------- time: %4d of %6d Sec" % (g_iter, now_t - last_t, now_t - start_t))
-				print('real:{},pred:{},confid:{}\n,acc:{:.4f},loss:{:.6f}'.format(
+				print('real:{},pred:{}\nconfid:{}\n,acc:{:.4f},loss:{:.6f}'.format(
 					target.tolist(),
 					torch.argmax(predict,dim=1).tolist(),
-					confid,
+					confid.item(),
 					predict[target].mean().item(),
 					loss.item())
 				)
