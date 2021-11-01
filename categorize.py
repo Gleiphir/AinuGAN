@@ -75,7 +75,7 @@ if __name__ =='__main__':
 			if batch_idx % 100 == 0:
 				last_t = now_t
 				now_t = time.time()
-				confid = torch.index_select(predict,1,target)
+				confid = torch.index_select(predict.detach(),1,target)
 				print("##############################")
 				print(confid)
 				#print(predict.size())
