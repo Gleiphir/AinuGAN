@@ -80,7 +80,7 @@ if __name__ =='__main__':
 				print("iter : %6d ------- time: %4d of %6d Sec" % (g_iter, now_t - last_t, now_t - start_t))
 				print('real:{},pred:{},acc:{.4f},loss:{.6f}'.format(
 					target.tolist(),
-					[ "".join( [ '{.2f}'.format(a) for a in torch.argmax(predict,dim=1).tolist() ] )  ],
+					torch.argmax(predict,dim=1).tolist(),
 					predict[target].mean().item(),
 					loss.item())
 				)
