@@ -93,6 +93,7 @@ if __name__ =='__main__':
 				)
 			)
 			if it >= num_tests:
+				over_flag = True
 				break
 
 # for scheduler_d in scheduler_ds:
