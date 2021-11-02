@@ -80,7 +80,7 @@ if __name__ =='__main__':
 			#print(predict[:,target].size())
 			#print('\n')
 			print("batch : %4d ------- time: %4d of %6d Sec" % (it, now_t - last_t, now_t - start_t))
-			print('real:{},pred:{}\nconfid: {}\n{} of {} hit, {:.1f}%\n ALL {} of {} hit, {:.1f}% '.format(
+			print('real:{},pred:{}\nconfid: {}\n{} of {} hit, {:.1f}%\n{} of {} hit, {:.1f}% in all '.format(
 					ground_truth,
 					pred_res,
 					','.join( "{:.3f}".format(a) for a in  confid.tolist()),
