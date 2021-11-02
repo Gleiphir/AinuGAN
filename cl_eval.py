@@ -10,7 +10,7 @@ from model_category import Classifier
 import time
 import os
 import random
-
+from torch.utils.data.sampler import RandomSampler
 
 BATCH_SIZE = 8
 
@@ -34,11 +34,6 @@ start_t=0
 last_t=0
 now_t=0
 
-OVER_ITER = 100000
-rand_idx = [x for x in range(len(loader))]
-random.shuffle(rand_idx)
-rand_idx = rand_idx[:num_tests]
-
 
 
 over_flag = False
@@ -48,8 +43,7 @@ if __name__ =='__main__':
 	hit_total = 0
 	samp_total = 0
 	while not over_flag:
-		for t,idx in enumerate(rand_idx):
-			(data, target) = loader[idx]
+		for it,(data, target) in enumerate(loader):
 			if data.size()[0] != BATCH_SIZE:
 				continue
 			data, target = Variable(data.cuda()), Variable(target.cuda())
@@ -76,7 +70,7 @@ if __name__ =='__main__':
 			for i in range(len(ground_truth)):
 				if ground_truth[i] == pred_res[i]:
 					hit += 1
-			hit_total+= hit
+			hit_total += hit
 			samp_total += BATCH_SIZE
 			print("##############################")
 
@@ -85,7 +79,7 @@ if __name__ =='__main__':
 			#print(confid.size())
 			#print(predict[:,target].size())
 			#print('\n')
-			print("batch : %4d ------- time: %4d of %6d Sec" % (t, now_t - last_t, now_t - start_t))
+			print("batch : %4d ------- time: %4d of %6d Sec" % (it, now_t - last_t, now_t - start_t))
 			print('real:{},pred:{}\nconfid: {}\n{} of {} hit, {:.1f}%\n ALL {} of {} hit, {:.1f}% '.format(
 					ground_truth,
 					pred_res,
@@ -98,6 +92,8 @@ if __name__ =='__main__':
 					hit_total /samp_total *100.0
 				)
 			)
+			if it >= num_tests:
+				break
 
 # for scheduler_d in scheduler_ds:
 # scheduler_d.step()
