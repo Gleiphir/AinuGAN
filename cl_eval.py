@@ -34,7 +34,7 @@ start_t=0
 last_t=0
 now_t=0
 
-
+it_total = 0
 
 over_flag = False
 
@@ -92,7 +92,8 @@ if __name__ =='__main__':
 					hit_total /samp_total *100.0
 				)
 			)
-			if it >= num_tests:
+			it_total += 1
+			if it_total >= num_tests:
 				over_flag = True
 				break
 

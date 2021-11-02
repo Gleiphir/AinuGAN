@@ -98,6 +98,7 @@ if __name__ =='__main__':
 				torch.save(CL.state_dict(),'clsf_{}'.format(g_iter))  # args.checkpoint_dir, 'gen_{}'.format(g_iter)))
 			if g_iter >= OVER_ITER:
 				over_flag = True
+				break
 # for scheduler_d in scheduler_ds:
 # scheduler_d.step()
 # scheduler_g.step()
