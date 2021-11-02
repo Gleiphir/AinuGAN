@@ -35,8 +35,9 @@ last_t=0
 now_t=0
 
 OVER_ITER = 100000
-
-rand_idx = random.shuffle([x for x in range(len(loader))])[num_tests]
+rand_idx = [x for x in range(len(loader))]
+random.shuffle(rand_idx)
+rand_idx = rand_idx[:num_tests]
 
 
 
@@ -44,6 +45,8 @@ over_flag = False
 
 if __name__ =='__main__':
 	start_t = time.time()
+	hit_total = 0
+	samp_total = 0
 	while not over_flag:
 		for t,idx in enumerate(rand_idx):
 			(data, target) = loader[idx]
@@ -73,7 +76,8 @@ if __name__ =='__main__':
 			for i in range(len(ground_truth)):
 				if ground_truth[i] == pred_res[i]:
 					hit += 1
-
+			hit_total+= hit
+			samp_total += BATCH_SIZE
 			print("##############################")
 
 			#print(torch.argmax(predict,dim=1))
@@ -82,13 +86,16 @@ if __name__ =='__main__':
 			#print(predict[:,target].size())
 			#print('\n')
 			print("batch : %4d ------- time: %4d of %6d Sec" % (t, now_t - last_t, now_t - start_t))
-			print('real:{},pred:{}\nconfid: {}\n{} of {} hit, {:.1f}%'.format(
+			print('real:{},pred:{}\nconfid: {}\n{} of {} hit, {:.1f}%\n ALL {} of {} hit, {:.1f}% '.format(
 					ground_truth,
 					pred_res,
 					','.join( "{:.3f}".format(a) for a in  confid.tolist()),
 					hit,
 					BATCH_SIZE,
-					hit / BATCH_SIZE * 100.0
+					hit / BATCH_SIZE * 100.0,
+					hit_total,
+					samp_total,
+					hit_total /samp_total *100.0
 				)
 			)
 
