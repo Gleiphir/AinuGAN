@@ -29,7 +29,7 @@ print(dset.class_to_idx)
 N_CLASS = len(dset.classes)
 
 
-num_tests = 1000
+num_tests = 100
 start_t=0
 last_t=0
 now_t=0
