@@ -15,7 +15,7 @@ import argparse
 
 Aparser = argparse.ArgumentParser()
 
-Aparser.add_argument("model",type=str,required=True)
+Aparser.add_argument("model",type=str)
 
 args = Aparser.parse_args()
 
