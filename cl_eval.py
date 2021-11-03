@@ -11,6 +11,13 @@ import time
 import os
 import random
 from torch.utils.data.sampler import RandomSampler
+import argparse
+
+Aparser = argparse.ArgumentParser()
+
+Aparser.add_argument("model",type=str,required=True)
+
+args = Aparser.parse_args()
 
 BATCH_SIZE = 8
 
@@ -54,7 +61,7 @@ if __name__ =='__main__':
 			# print(generator(z).size())
 			losses = []
 
-			CL.load_state_dict(torch.load('clsf_{}'.format(40000)))
+			CL.load_state_dict(torch.load(args.model))
 
 			predict = CL(data)
 			#print(target,data.size(1),data.size())
@@ -79,7 +86,7 @@ if __name__ =='__main__':
 			#print(confid.size())
 			#print(predict[:,target].size())
 			#print('\n')
-			print("batch : %4d ------- time: %4d of %6d Sec" % (it, now_t - last_t, now_t - start_t))
+			print("batch : %4d ------- time: %4d of %6d Sec" % (it_total, now_t - last_t, now_t - start_t))
 			print('real:{},pred:{}\nconfid: {}\n{} of {} hit, {:.1f}%\n{} of {} hit, {:.1f}% in all '.format(
 					ground_truth,
 					pred_res,
