@@ -36,7 +36,7 @@ print(dset.class_to_idx)
 
 N_CLASS = len(dset.classes)
 
-SAMPLES_FOR_EACH_IMG = 1
+SAMPLES_FOR_EACH_IMG = 10
 
 
 num_tests = 100
@@ -118,10 +118,10 @@ if __name__ =='__main__':
 		for item in rawResults.items():
 			print(item)
 			dic = {
-				"filename":item[0],
-				"category":item[1],
+				"filename":item[0][0],
+				"category":item[0][1],
 			}
 			for i in range(SAMPLES_FOR_EACH_IMG):
-				dic[i] = rawResults[item][i]
+				dic[i] = item[1][i]
 			wrt.writerow(dic)
 	print("wrote to file")
