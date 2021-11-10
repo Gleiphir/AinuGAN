@@ -115,13 +115,11 @@ if __name__ =='__main__':
 	#sortedKeys = sorted(rawResults.items(), key=lambda item:sum(rawResults[item]))
 	with open("./PredByNameRec.csv","w") as fp:
 		wrt = csv.writer(fp)
+		wrt.writerow([ "filename", "category"  ])
 		for item in rawResults.items():
-			print(item)
-			dic = {
-				"filename":item[0][0],
-				"category":item[0][1],
-			}
+			lst = [ item[0][0],item[0][1] ]
+
 			for i in range(SAMPLES_FOR_EACH_IMG):
-				dic[i] = item[1][i]
-			wrt.writerow(dic)
+				lst[i+2] = item[1][i]
+			wrt.writerow(lst)
 	print("wrote to file")
