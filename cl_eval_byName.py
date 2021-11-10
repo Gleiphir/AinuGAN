@@ -12,7 +12,7 @@ import os
 import random
 from torch.utils.data.sampler import RandomSampler
 import argparse
-import operator
+import csv
 
 Aparser = argparse.ArgumentParser()
 
@@ -112,8 +112,15 @@ if __name__ =='__main__':
 					)
 				)
 			it_total += 1
-	sortedKeys = sorted(rawResults.items(), key=lambda item:sum(rawResults[item]))
-	with open("./PredByNameRec.json") as fp:
-		for key in sortedKeys:
-			print(key[0].split("/")[-1], key[1],":", sum(rawResults[key]) / SAMPLES_FOR_EACH_IMG, file=fp)
+	#sortedKeys = sorted(rawResults.items(), key=lambda item:sum(rawResults[item]))
+	with open("./PredByNameRec.csv","w") as fp:
+		wrt = csv.writer(fp)
+		for item in rawResults.items():
+			dic = {
+				"filename":item[0],
+				"category":item[1],
+			}
+			for i in range(SAMPLES_FOR_EACH_IMG):
+				dic[i] = rawResults[item][i]
+			wrt.writerow(dic)
 	print("wrote to file")
