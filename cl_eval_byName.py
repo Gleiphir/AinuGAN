@@ -112,5 +112,6 @@ if __name__ =='__main__':
 				)
 			it_total += 1
 	sortedKeys = sorted(Results.items(),key=lambda item:sum(Results[item]) )
-	print(sortedKeys)
+	for key in sortedKeys[:100]:
+		print(key," : ",sum(Results[key]) / SAMPLES_FOR_EACH_IMG )
 
