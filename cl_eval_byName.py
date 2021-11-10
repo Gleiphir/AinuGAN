@@ -112,6 +112,7 @@ if __name__ =='__main__':
 				)
 			it_total += 1
 	sortedKeys = sorted(Results.items(),key=lambda item:sum(Results[item]) )
-	for key in sortedKeys[:100]:
-		print(key," : ",sum(Results[key]) / SAMPLES_FOR_EACH_IMG )
-
+	with open("./PredByNameRec.json") as fp:
+		for key in sortedKeys:
+			print(key[0].split("/")[-1],key[1],":",sum(Results[key]) / SAMPLES_FOR_EACH_IMG ,file=fp)
+	print("wrote to file")
