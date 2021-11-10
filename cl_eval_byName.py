@@ -111,5 +111,6 @@ if __name__ =='__main__':
 					)
 				)
 			it_total += 1
+	sortedKeys = sorted(Results.items(),key=lambda item:sum(Results[item]) )
+	print(sortedKeys)
 
-	print(Results)
