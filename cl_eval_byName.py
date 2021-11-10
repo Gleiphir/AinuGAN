@@ -35,7 +35,7 @@ print(dset.class_to_idx)
 
 N_CLASS = len(dset.classes)
 
-SAMPLES_FOR_EACH_IMG = 10
+SAMPLES_FOR_EACH_IMG = 5
 
 
 num_tests = 100
