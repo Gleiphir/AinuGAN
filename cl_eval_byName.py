@@ -12,6 +12,7 @@ import os
 import random
 from torch.utils.data.sampler import RandomSampler
 import argparse
+import operator
 
 Aparser = argparse.ArgumentParser()
 
@@ -35,7 +36,7 @@ print(dset.class_to_idx)
 
 N_CLASS = len(dset.classes)
 
-SAMPLES_FOR_EACH_IMG = 5
+SAMPLES_FOR_EACH_IMG = 1
 
 
 num_tests = 100
@@ -45,7 +46,7 @@ now_t=0
 
 it_total = 0
 
-Results = { x:[] for x in dset.imgs }
+rawResults = {x:[] for x in dset.imgs}
 
 over_flag = False
 
@@ -84,7 +85,7 @@ if __name__ =='__main__':
 				if ground_truth[i] == pred_res[i]:
 					hit += 1
 
-			Results[ dset.imgs[it] ].append(confid.tolist()[0])
+			rawResults[ dset.imgs[it]].append(confid.tolist()[0])
 
 			hit_total += hit
 			samp_total += BATCH_SIZE
@@ -111,8 +112,8 @@ if __name__ =='__main__':
 					)
 				)
 			it_total += 1
-	sortedKeys = sorted(Results.items(),key=lambda item:sum(Results[item]) )
+	sortedKeys = sorted(rawResults.items(), key=lambda item:sum(rawResults[item]))
 	with open("./PredByNameRec.json") as fp:
 		for key in sortedKeys:
-			print(key[0].split("/")[-1],key[1],":",sum(Results[key]) / SAMPLES_FOR_EACH_IMG ,file=fp)
+			print(key[0].split("/")[-1], key[1],":", sum(rawResults[key]) / SAMPLES_FOR_EACH_IMG, file=fp)
 	print("wrote to file")
