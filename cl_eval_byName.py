@@ -111,8 +111,5 @@ if __name__ =='__main__':
 					)
 				)
 			it_total += 1
-			if it_total >= num_tests:
-				over_flag = True
-				break
 
 	print(Results)
