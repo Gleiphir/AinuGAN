@@ -116,6 +116,7 @@ if __name__ =='__main__':
 	with open("./PredByNameRec.csv","w") as fp:
 		wrt = csv.writer(fp)
 		for item in rawResults.items():
+			print(item)
 			dic = {
 				"filename":item[0],
 				"category":item[1],
