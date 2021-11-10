@@ -120,6 +120,6 @@ if __name__ =='__main__':
 			lst = [ item[0][0],item[0][1] ]
 
 			for i in range(SAMPLES_FOR_EACH_IMG):
-				lst[i+2] = item[1][i]
+				lst.append(item[1][i])
 			wrt.writerow(lst)
 	print("wrote to file")
